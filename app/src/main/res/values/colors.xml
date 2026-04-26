@@ -2,17 +2,17 @@
 <resources>
     <color name="white">#FFFFFFFF</color>
     <color name="black">#FF000000</color>
-    <color name="crimson">#DC143C</color>
-    <color name="dark_navy">#000080</color>
+    <color name="cream">#F5F5F0</color>
+    <color name="dark_green">#006400</color>
 
     <!-- Semantic Colors -->
-    <color name="bg_primary">#DC143C</color>
+    <color name="bg_primary">#F5F5F0</color>
     <color name="bg_card">#FFFFFFFF</color>
-    <color name="button_color">#000080</color>
-    <color name="text_on_bg">#FFFFFFFF</color>
-    <color name="text_on_card">#FF000000</color>
+    <color name="button_color">#006400</color>
+    <color name="text_on_bg">#006400</color>
+    <color name="text_on_card">#006400</color>
 
-    <color name="colorPrimary">#000080</color>
-    <color name="colorPrimaryDark">#000060</color>
-    <color name="colorAccent">#DC143C</color>
+    <color name="colorPrimary">#006400</color>
+    <color name="colorPrimaryDark">#004d00</color>
+    <color name="colorAccent">#006400</color>
 </resources>

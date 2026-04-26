@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.rezio23.translatex.R
 import com.rezio23.translatex.databinding.ActivityMainBinding
 import com.rezio23.translatex.model.SUPPORTED_LANGUAGES
 
@@ -31,7 +32,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupSpinners() {
         val sourceNames = SUPPORTED_LANGUAGES.map { it.name }
-        val sourceAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, sourceNames)
+        // Use custom spinner_item for white text
+        val sourceAdapter = ArrayAdapter(this, R.layout.spinner_item, sourceNames)
         sourceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spinnerSourceLang.adapter = sourceAdapter
         binding.spinnerSourceLang.setSelection(0)
@@ -44,7 +46,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         val targetNames = targetLanguages.map { it.name }
-        val targetAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, targetNames)
+        // Use custom spinner_item for white text
+        val targetAdapter = ArrayAdapter(this, R.layout.spinner_item, targetNames)
         targetAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spinnerTargetLang.adapter = targetAdapter
         val defaultTargetIndex = targetLanguages.indexOfFirst { it.code == "es" }
@@ -119,7 +122,6 @@ class MainActivity : AppCompatActivity() {
                     binding.progressBar.visibility = View.GONE
                     binding.tvError.visibility = View.VISIBLE
                     binding.tvError.text = state.message
-                    // Log error to console as well
                     android.util.Log.e("MainActivity", "Translation Error: ${state.message}")
                 }
             }
