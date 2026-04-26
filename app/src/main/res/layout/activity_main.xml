@@ -28,7 +28,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Powered by Google Translate"
-            android:textColor="#AAFFFFFF"
+            android:textColor="@color/white"
+            android:alpha="0.8"
             android:textSize="13sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvTitle" />
@@ -42,7 +43,7 @@
             android:background="@drawable/spinner_bg"
             android:paddingStart="12dp"
             android:paddingEnd="12dp"
-            android:popupBackground="@color/bg_card"
+            android:popupBackground="@color/white"
             app:layout_constraintEnd_toStartOf="@id/btnSwapLanguages"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tvSubtitle" />
@@ -68,7 +69,7 @@
             android:background="@drawable/spinner_bg"
             android:paddingStart="12dp"
             android:paddingEnd="12dp"
-            android:popupBackground="@color/bg_card"
+            android:popupBackground="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/btnSwapLanguages"
             app:layout_constraintTop_toBottomOf="@id/tvSubtitle" />
@@ -97,8 +98,8 @@
                     android:background="@null"
                     android:hint="Enter text to translate..."
                     android:minLines="4"
-                    android:textColor="@color/white"
-                    android:textColorHint="#88FFFFFF"
+                    android:textColor="@color/black"
+                    android:textColorHint="#44000000"
                     android:textSize="16sp"
                     android:inputType="textMultiLine"
                     android:gravity="top"
@@ -112,7 +113,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Clear"
-                    android:textColor="#AAFFFFFF"
+                    android:textColor="#88000000"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/etSourceText" />
@@ -129,6 +130,8 @@
             android:paddingBottom="14dp"
             android:text="Translate"
             android:textSize="16sp"
+            android:backgroundTint="@color/dark_navy"
+            android:textColor="@color/white"
             app:cornerRadius="12dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -141,6 +144,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:visibility="gone"
+            android:indeterminateTint="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/btnTranslate" />
@@ -152,11 +156,12 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:gravity="center"
-            android:textColor="#FFFF6B6B"
+            android:textColor="@color/white"
+            android:textStyle="bold"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btnTranslate" />
+            app:layout_constraintTop_toBottomOf="@id/progressBar" />
 
         <!-- Result Card -->
         <com.google.android.material.card.MaterialCardView
@@ -168,7 +173,7 @@
             app:cardCornerRadius="12dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/progressBar">
+            app:layout_constraintTop_toBottomOf="@id/tvError">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -180,7 +185,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Translation"
-                    android:textColor="#AAFFFFFF"
+                    android:textColor="#88000000"
                     android:textSize="12sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -191,7 +196,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:minLines="4"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textSize="18sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -203,7 +208,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Copy"
-                    android:textColor="@color/colorAccent"
+                    android:textColor="@color/black"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tvTranslatedText" />

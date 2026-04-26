@@ -13,7 +13,9 @@ data class TranslationResult(
 
 val SUPPORTED_LANGUAGES = listOf(
     Language("auto", "Auto Detect"),
+    Language("km", "Khmer"),
     Language("en", "English"),
+    Language("zh-CN", "Chinese (Simplified)"),
     Language("es", "Spanish"),
     Language("fr", "French"),
     Language("de", "German"),
@@ -22,7 +24,6 @@ val SUPPORTED_LANGUAGES = listOf(
     Language("ru", "Russian"),
     Language("ja", "Japanese"),
     Language("ko", "Korean"),
-    Language("zh", "Chinese (Simplified)"),
     Language("ar", "Arabic"),
     Language("hi", "Hindi"),
     Language("tr", "Turkish"),

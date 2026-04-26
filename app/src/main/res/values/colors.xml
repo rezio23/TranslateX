@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="bg_primary">#FF1A237E</color>
-    <color name="bg_card">#FF283593</color>
-    <color name="colorPrimary">#FF3949AB</color>
-    <color name="colorPrimaryDark">#FF1A237E</color>
-    <color name="colorAccent">#FF00BCD4</color>
+    <color name="black">#FF000000</color>
+    <color name="crimson">#DC143C</color>
+    <color name="dark_navy">#000080</color>
+
+    <!-- Semantic Colors -->
+    <color name="bg_primary">#DC143C</color>
+    <color name="bg_card">#FFFFFFFF</color>
+    <color name="button_color">#000080</color>
+    <color name="text_on_bg">#FFFFFFFF</color>
+    <color name="text_on_card">#FF000000</color>
+
+    <color name="colorPrimary">#000080</color>
+    <color name="colorPrimaryDark">#000060</color>
+    <color name="colorAccent">#DC143C</color>
 </resources>

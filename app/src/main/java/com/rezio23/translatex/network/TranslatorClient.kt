@@ -1,5 +1,6 @@
 package com.rezio23.translatex.network
 
+import com.google.gson.JsonObject
 import com.google.gson.JsonParser
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
@@ -10,10 +11,9 @@ import java.util.concurrent.TimeUnit
 
 object TranslatorClient {
 
-    // TODO: Replace with your RapidAPI key from https://rapidapi.com/joshimuddin8212/api/free-google-translator
-    private const val RAPIDAPI_KEY = "YOUR_RAPIDAPI_KEY"
-    private const val RAPIDAPI_HOST = "free-google-translator.p.rapidapi.com"
-    private const val BASE_URL = "https://free-google-translator.p.rapidapi.com/external-api/free-google-translator"
+    private const val RAPIDAPI_KEY = "ab5bfacfe9msh72dc7284a022c12p12402ajsnbcb3662748e9"
+    private const val RAPIDAPI_HOST = "google-api31.p.rapidapi.com"
+    private const val BASE_URL = "https://google-api31.p.rapidapi.com/translate"
 
     private val authInterceptor = AuthInterceptor(RAPIDAPI_KEY, RAPIDAPI_HOST)
 
@@ -30,35 +30,55 @@ object TranslatorClient {
 
     suspend fun translate(text: String, fromLang: String, toLang: String): String {
         return kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.IO) {
-            val jsonBody = """{"translate":"rapidapi"}"""
-            val body = jsonBody.toRequestBody("application/json".toMediaType())
-
-            val from = if (fromLang == "auto") "auto" else fromLang
+            
+            val jsonObject = JsonObject().apply {
+                addProperty("text", text)
+                addProperty("to", toLang)
+                // Reverting to empty string for auto-detect based on API docs in screenshot
+                addProperty("from_lang", if (fromLang == "auto") "" else fromLang)
+            }
+            
+            val body = jsonObject.toString().toRequestBody("application/json".toMediaType())
 
             val request = Request.Builder()
-                .url("$BASE_URL?from=$from&to=$toLang&string=${java.net.URLEncoder.encode(text, "UTF-8")}")
+                .url(BASE_URL)
                 .post(body)
                 .build()
 
             val response = okHttpClient.newCall(request).execute()
-            val responseBody = response.body?.string() ?: throw Exception("Empty response")
+            val responseBody = response.body?.string() ?: ""
 
             if (!response.isSuccessful) {
                 when (response.code) {
-                    401, 403 -> throw Exception("Invalid RapidAPI key. Please update it in TranslatorClient.kt")
-                    429 -> throw Exception("Rate limit exceeded. Please try again later.")
-                    else -> throw Exception("API error: ${response.code}")
+                    401, 403 -> throw Exception("Subscription Required. Please click 'Subscribe to Test' on the RapidAPI page.")
+                    429 -> throw Exception("Rate limit reached. Wait a few seconds.")
+                    else -> throw Exception("API Error ${response.code}: $responseBody")
                 }
             }
 
-            // Parse: response is plain translated text or JSON
             try {
-                val json = JsonParser.parseString(responseBody).asJsonObject
-                json.get("translation")?.asString
-                    ?: json.get("translatedText")?.asString
-                    ?: responseBody
+                val jsonElement = JsonParser.parseString(responseBody)
+                
+                if (jsonElement.isJsonObject) {
+                    val obj = jsonElement.asJsonObject
+                    if (obj.has("Error")) {
+                        return@withContext "Error: " + obj.get("Error").asString
+                    }
+                }
+
+                if (jsonElement.isJsonArray) {
+                    val firstObject = jsonElement.asJsonArray[0].asJsonObject
+                    firstObject.get("translated")?.asString ?: responseBody
+                } else if (jsonElement.isJsonObject) {
+                    val obj = jsonElement.asJsonObject
+                    obj.get("translated")?.asString
+                        ?: obj.get("translated_text")?.asString
+                        ?: responseBody
+                } else {
+                    responseBody.trim()
+                }
             } catch (e: Exception) {
-                responseBody.trim()
+                responseBody.trim().takeIf { it.isNotEmpty() } ?: "Error: Empty response"
             }
         }
     }
